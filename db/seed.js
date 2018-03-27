@@ -10,10 +10,19 @@ Store.remove({}).then(() => {
       Promise.all([
         Product.create({
           artist: 'Brandon',
-          tile: 'A dog',
-          description: 'a drawing of a dog',
+          title: 'A dog',
+          description: 'A drawing of a dog',
           image: 'https://i.pinimg.com/originals/5f/c8/37/5fc83789f0886812ef3f26e8a22823d2.jpg',
           price: 500000
+        }).then(product => {
+          store.products.push(product)
+        }),
+        Product.create({
+          artist: 'Brandon',
+          title: 'A sponge',
+          description: 'Literally a picture of a sponge',
+          image: 'https://images-na.ssl-images-amazon.com/images/I/51bJaFHxPPL._SX342_.jpg',
+          price: 13
         }).then(product => {
           store.products.push(product)
         })

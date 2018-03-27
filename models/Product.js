@@ -2,7 +2,7 @@ const mongoose = require('../db/connection')
 
 const ProductSchema = new mongoose.Schema({
   artist: String,
-  tile: String,
+  title: String,
   description: String,
   image: String,
   price: Number
