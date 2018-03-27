@@ -9,6 +9,6 @@ const ProductSchema = new mongoose.Schema({
 
 })
 
-mongoose.model('Product', ProductSchema)
+const Product = mongoose.model('Product', ProductSchema)
 
-module.exports = mongoose
+module.exports = Product
