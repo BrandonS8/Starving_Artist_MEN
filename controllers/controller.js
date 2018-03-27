@@ -5,6 +5,7 @@ const Product = require('../models/Product')
 
 router.get('/', (req, res) => {
   Store.find()
+      .populate('products')
       .then((store) => {
         res.json(store)
       })
@@ -15,6 +16,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   Store.findOne({ _id: req.params.id})
+  .populate('products')
   .then(store => {
     res.json(store)
   })
@@ -65,6 +67,41 @@ router.post('/:id', (req, res) => {
   })
   .then(() => {
     res.json('Product added')
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
+
+router.put('/:storeId/:productId/edit', (req, res) => {
+  Product.findOneAndUpdate({_id: req.params.productId}, req.body)
+  .then(() => {
+    res.json('Product updated')
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
+
+router.put('/:id/edit', (req, res) => {
+  Store.findOneAndUpdate({id: req.params.id}, req.body)
+  .then(() => {
+    res.json('Store updated')
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
+
+router.delete('/:storeId/:productId', (req, res) => {
+  Product.findOneAndRemove({_id: req.params.productId}, req.body)
+  .then(() => {
+    res.json('Product Removed')
+  })
+  Store.findOne({_id: req.params.storeId})
+  .then(store => {
+    store.products.pull({_id: req.params.productId})
+    store.save()
   })
   .catch(err => {
     console.log(err)
