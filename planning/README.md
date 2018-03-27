@@ -41,4 +41,18 @@ Starving Artist is an app that allows users to upload artwork to sell.
 2. User authentication 
 3. Admin Model
 4. Buyer Model with cart and price update# Starving_Artist
-# Starving_Artist_MEN
+
+## Set-Up Assignments
+
+1. Brandon and Mahwash: Set up and establish back end.
+
+2. Hannah: Get react started, create component file tree, etc. Add comments.
+
+## Front End Component Work Schedule
+
+1. Brandon: StoreList, Add a Store
+
+2. Hannah: SingleStore, Add a product, Edit the Store
+
+3. Mahwash: Product Show Page, Edit Product, Delete
+
