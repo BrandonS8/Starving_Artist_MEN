@@ -3,7 +3,7 @@ const router = express.Router()
 const Store = require('../models/Store')
 const Product = require('../models/Product')
 
-router.get('/api', (req, res) => {
+router.get('/', (req, res) => {
   Store.find()
       .then((store) => {
         res.json(store)
@@ -14,4 +14,4 @@ router.get('/api', (req, res) => {
 })
 
 
-module.export = router
+module.exports = router
