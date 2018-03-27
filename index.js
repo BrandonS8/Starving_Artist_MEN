@@ -10,4 +10,5 @@ app.use(parser.json())
 
 app.use('/api', apiController)
 
-app.listen(3001, () => console.log('Listening on port 3001 :)'))
+app.set('port', process.env.PORT || 3000)
+app.listen(app.get('port'))
