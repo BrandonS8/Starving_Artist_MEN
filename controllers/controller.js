@@ -1,11 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
-const mongoose = require('../models/Store')
-const Store = mongoose.model('Store')
-
-const mongoose = require('../models/Product')
-const Product = mongoose.model('..models/Product')
-
+const Store = require('../models/Store')
+const Product = require('../models/Product')
 
 module.export = router
