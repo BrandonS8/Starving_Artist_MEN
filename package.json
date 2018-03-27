@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/HannahAurand/Starving_Artist_MEN/issues"
   },
-  "homepage": "https://github.com/HannahAurand/Starving_Artist_MEN#readme"
+  "homepage": "https://github.com/HannahAurand/Starving_Artist_MEN#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.12"
+  }
 }
