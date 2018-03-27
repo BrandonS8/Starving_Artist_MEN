@@ -5,7 +5,7 @@ const StoreSchema = new mongoose.Schema({
   about: String,
   products: [
     {
-      type: mongoose.Schema.Types.ObjectId
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'Product'
     }
   ]

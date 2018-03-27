@@ -2,13 +2,13 @@ const mongoose = require('../db/connection')
 
 const ProductSchema = new mongoose.Schema({
   artist: String,
-  tile: String,
+  title: String,
   description: String,
   image: String,
   price: Number
 
 })
 
-mongoose.model('Product', ProductSchema)
+const Product = mongoose.model('Product', ProductSchema)
 
-module.exports = mongoose
+module.exports = Product
