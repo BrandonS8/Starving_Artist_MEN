@@ -14,6 +14,16 @@ router.get('/', (req, res) => {
       })
 })
 
+router.get('/products', (req, res) => {
+  Product.find()
+      .then((product) => {
+        res.json(product)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+})
+
 router.get('/:id', (req, res) => {
   Store.findOne({ _id: req.params.id})
   .populate('products')
@@ -94,7 +104,7 @@ router.put('/:id/edit', (req, res) => {
 })
 
 router.delete('/:storeId/:productId', (req, res) => {
-  Product.findOneAndRemove({_id: req.params.productId}, req.body)
+  Product.findOneAndRemove({_id: req.params.productId})
   .then(() => {
     res.json('Product Removed')
   })
@@ -102,6 +112,32 @@ router.delete('/:storeId/:productId', (req, res) => {
   .then(store => {
     store.products.pull({_id: req.params.productId})
     store.save()
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
+
+router.delete('/:id', (req, res) => {
+  let productsToRemove = []
+  Store.findOne({_id: req.params.id})
+  .then(store => {
+    store.products.forEach(product => {
+      productsToRemove.push(product)
+    })
+  })
+  .then(() => {
+    productsToRemove.forEach(product => {
+      Product.findOneAndRemove({_id: product}).then(product => product.save())
+    })
+  })
+  .then(() => {
+    Store.findOneAndRemove({_id: req.params.id}).then(store => {
+      store.save()
+    })
+  })
+  .then(() => {
+    res.json('Store Removed')
   })
   .catch(err => {
     console.log(err)
