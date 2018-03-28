@@ -94,7 +94,7 @@ router.put('/:storeId/:productId/edit', (req, res) => {
 })
 
 router.put('/:id/edit', (req, res) => {
-  Store.findOneAndUpdate({id: req.params.id}, req.body)
+  Store.findOneAndUpdate({_id: req.params.id}, req.body)
   .then(() => {
     res.json('Store updated')
   })
