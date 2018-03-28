@@ -101,6 +101,7 @@ router.put('/:storeId/:productId/edit', (req, res) => {
 })
 //edit the store route
 router.put('/:id/edit', (req, res) => {
+<<<<<<< HEAD
   Store.findOneAndUpdate({ id: req.params.id }, req.body)
     .then(() => {
       res.json('Store updated')
@@ -108,6 +109,15 @@ router.put('/:id/edit', (req, res) => {
     .catch(err => {
       console.log(err)
     })
+=======
+  Store.findOneAndUpdate({_id: req.params.id}, req.body)
+  .then(() => {
+    res.json('Store updated')
+  })
+  .catch(err => {
+    console.log(err)
+  })
+>>>>>>> c85587b378630c72515642bf4a2d934fae6ec28a
 })
 
 //Delete a product in the store
