@@ -3,6 +3,7 @@ const router = express.Router()
 const Store = require('../models/Store')
 const Product = require('../models/Product')
 
+//display homepage of stores
 router.get('/', (req, res) => {
   Store.find()
     .populate('products')
@@ -14,6 +15,7 @@ router.get('/', (req, res) => {
     })
 })
 
+//display all products
 router.get('/products', (req, res) => {
   Product.find()
     .then(product => {
@@ -35,6 +37,7 @@ router.get('/:id', (req, res) => {
       console.log(err)
     })
 })
+//create a store
 router.post('/', (req, res) => {
   Store.create({
     name: req.body.name,
@@ -49,6 +52,7 @@ router.post('/', (req, res) => {
     })
 })
 
+//find a single product
 router.get('/:storeId/:productId', (req, res) => {
   Product.findOne({ _id: req.params.productId })
     .then(product => {
@@ -59,6 +63,7 @@ router.get('/:storeId/:productId', (req, res) => {
     })
 })
 
+//add a new product
 router.post('/:id', (req, res) => {
   Store.findOne({ _id: req.params.id })
     .then(store => {
@@ -84,6 +89,7 @@ router.post('/:id', (req, res) => {
     })
 })
 
+//update the product details
 router.put('/:storeId/:productId/edit', (req, res) => {
   Product.findOneAndUpdate({ _id: req.params.productId }, req.body)
     .then(() => {
@@ -104,6 +110,7 @@ router.put('/:id/edit', (req, res) => {
     })
 })
 
+//Delete a product in the store
 router.delete('/:storeId/:productId', (req, res) => {
   Product.findOneAndRemove({ _id: req.params.productId }).then(() => {
     res.json('Product Removed')
@@ -118,6 +125,7 @@ router.delete('/:storeId/:productId', (req, res) => {
     })
 })
 
+//delete the store
 router.delete('/:id', (req, res) => {
   let productsToRemove = []
   Store.findOne({ _id: req.params.id })
