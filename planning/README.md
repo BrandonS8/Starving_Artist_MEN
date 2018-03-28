@@ -44,9 +44,9 @@ Starving Artist is an app that allows users to upload artwork to sell.
 
 ## Set-Up Assignments (HA)
 
-1. Brandon and Mahwash: Set up and establish back end.
+1. Brandon and Mahwash: Set up and establish back end. Work on various front end components.
 
-2. Hannah: Get react started, create component file tree, etc. Add comments.
+2. Hannah: Get react started, create component file tree, etc. Create and maintain kanban board. Facilitate communication. Work on various components as determined by kanban board.
 
 ## Front End Component Work Schedule (HA)
 
