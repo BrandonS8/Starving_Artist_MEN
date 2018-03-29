@@ -1,6 +1,8 @@
 const Store = require('../models/Store')
 const Product = require('../models/Product')
 
+const fs = require('fs')
+
 Store.remove({}).then(() => {
   Product.remove({}).then(() => {
     Store.create({
@@ -59,3 +61,21 @@ Store.remove({}).then(() => {
     })
   })
 })
+
+// Remove all files from public folder
+fs.readdir('public', (err, files) => {
+  if (err) {
+    console.log(err)
+  }
+  console.log(files)
+  files.forEach((file, err) => {
+    fs.unlink(`public/${file}`)
+    if (err) {
+      console.log(err)
+    }
+  })
+  console.log(files)
+  console.log('Public directory cleared')
+})
+
+// https://stackoverflow.com/questions/27072866/how-to-remove-all-files-from-directory-without-removing-directory-in-node-js

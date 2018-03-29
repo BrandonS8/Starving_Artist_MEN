@@ -127,7 +127,8 @@ router.put('/:id/edit', (req, res) => {
 
 // Delete a product in the store
 router.delete('/:storeId/:productId', (req, res) => {
-  Product.findOneAndRemove({ _id: req.params.productId }).then(() => {
+  Product.findOneAndRemove({ _id: req.params.productId }).then((product) => {
+    console.log(product)
     res.json('Product Removed')
   })
   Store.findOne({ _id: req.params.storeId })
