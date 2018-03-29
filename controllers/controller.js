@@ -2,6 +2,28 @@ const express = require('express')
 const router = express.Router()
 const Store = require('../models/Store')
 const Product = require('../models/Product')
+const path = require('path')
+
+// /upload is at the top so that it doesn't contradict /:id
+router.post('/upload', (req, res, next) => {
+  console.log(req)
+  let imageFile = req.files.file
+
+  imageFile.mv(`./public/${req.body.filename}.jpg`, function(err) {
+    console.log(path.resolve(`./public/${req.body.filename}.jpg`))
+    if (err) {
+      return res.status(500).send(err)
+    }
+    res.json({ file: `public/${req.body.filename}.jpg` })
+  })
+})
+
+// catch 404
+router.use(function(req, res, next) {
+  const err = new Error('Not Found')
+  err.status = 404
+  next(err)
+})
 
 //display homepage of stores
 router.get('/', (req, res) => {
@@ -101,23 +123,13 @@ router.put('/:storeId/:productId/edit', (req, res) => {
 })
 //edit the store route
 router.put('/:id/edit', (req, res) => {
-<<<<<<< HEAD
-  Store.findOneAndUpdate({ id: req.params.id }, req.body)
+  Store.findOneAndUpdate({ _id: req.params.id }, req.body)
     .then(() => {
       res.json('Store updated')
     })
     .catch(err => {
       console.log(err)
     })
-=======
-  Store.findOneAndUpdate({_id: req.params.id}, req.body)
-  .then(() => {
-    res.json('Store updated')
-  })
-  .catch(err => {
-    console.log(err)
-  })
->>>>>>> c85587b378630c72515642bf4a2d934fae6ec28a
 })
 
 //Delete a product in the store
@@ -163,5 +175,8 @@ router.delete('/:id', (req, res) => {
       console.log(err)
     })
 })
+
+//adding file upload functionality to the server
+//referenced from: https://levelup.gitconnected.com/file-upload-with-node-js-react-js-686e342ad7e7
 
 module.exports = router
