@@ -125,10 +125,22 @@ router.put('/:id/edit', (req, res) => {
     })
 })
 
+//
+
+let string = 'https://starving-artist.herokuapp.com/public/image262.jpg'
+
+let image = string.split('image')
+
+console.log(image[1])
+
 // Delete a product in the store
 router.delete('/:storeId/:productId', (req, res) => {
   Product.findOneAndRemove({ _id: req.params.productId }).then((product) => {
-    console.log(product)
+    if (!product.image.includes('seed')) {
+      let image = product.image
+      let imageNumber = image.split('image')
+      fs.unlink(`public/image${imageNumber}`)
+    }
     res.json('Product Removed')
   })
   Store.findOne({ _id: req.params.storeId })
@@ -152,8 +164,14 @@ router.delete('/:id', (req, res) => {
     })
     .then(() => {
       productsToRemove.forEach(product => {
-        Product.findOneAndRemove({ _id: product }).then(product =>
+        Product.findOneAndRemove({ _id: product }).then(product => {
+          if (!product.image.includes('seed')) {
+            let image = product.image
+            let imageNumber = image.split('image')
+            fs.unlink(`public/image${imageNumber}`)
+          }
           product.save()
+        }
         )
       })
     })

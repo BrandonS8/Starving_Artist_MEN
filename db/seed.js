@@ -14,7 +14,7 @@ Store.remove({}).then(() => {
           artist: 'Brandon',
           title: 'A dog',
           description: 'A drawing of a dog',
-          image: 'https://i.pinimg.com/originals/5f/c8/37/5fc83789f0886812ef3f26e8a22823d2.jpg',
+          image: 'https://starving-artist.herokuapp.com/public/seed/dog.jpg',
           price: 500000
         }).then(product => {
           store.products.push(product)
@@ -23,7 +23,7 @@ Store.remove({}).then(() => {
           artist: 'Brandon',
           title: 'A sponge',
           description: 'Literally a picture of a sponge',
-          image: 'https://images-na.ssl-images-amazon.com/images/I/51bJaFHxPPL._SX342_.jpg',
+          image: 'https://starving-artist.herokuapp.com/public/seed/sponge.jpg',
           price: 13
         }).then(product => {
           store.products.push(product)
@@ -41,7 +41,7 @@ Store.remove({}).then(() => {
           artist: 'Carl',
           title: 'Carl',
           description: 'A picture of carl',
-          image: 'https://vignette.wikia.nocookie.net/jimmyneutron/images/7/71/Carl.png/revision/latest?cb=20180219044646',
+          image: 'https://starving-artist.herokuapp.com/public/seed/carl.png',
           price: 1
         }).then(product => {
           store.products.push(product)
@@ -50,7 +50,7 @@ Store.remove({}).then(() => {
           artist: 'Carl',
           title: 'Teacher Carl',
           description: 'Carl does a teach',
-          image: 'https://vignette.wikia.nocookie.net/poohadventures/images/d/df/Carl_Wheezer.jpg/revision/latest?cb=20130526014202',
+          image: 'https://starving-artist.herokuapp.com/public/seed/carl2.jpg',
           price: 2
         }).then(product => {
           store.products.push(product)
@@ -69,9 +69,11 @@ fs.readdir('public', (err, files) => {
   }
   console.log(files)
   files.forEach((file, err) => {
-    fs.unlink(`public/${file}`)
-    if (err) {
-      console.log(err)
+    if (file !== 'seed') {
+      fs.unlink(`public/${file}`)
+      if (err) {
+        console.log(err)
+      }
     }
   })
   console.log(files)
