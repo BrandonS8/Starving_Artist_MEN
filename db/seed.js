@@ -41,7 +41,7 @@ Store.remove({}).then(() => {
           artist: 'Carl',
           title: 'Carl',
           description: 'A picture of carl',
-          image: 'https://starving-artist.herokuapp.com/public/seed/carl.png',
+          image: 'https://starving-artist.herokuapp.com/public/seed/carl1.png',
           price: 1
         }).then(product => {
           store.products.push(product)
