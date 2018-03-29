@@ -3,6 +3,7 @@ const router = express.Router()
 const Store = require('../models/Store')
 const Product = require('../models/Product')
 const path = require('path')
+const fs = require('fs')
 
 // /upload is at the top so that it doesn't contradict /:id
 router.post('/upload', (req, res, next) => {
@@ -125,21 +126,13 @@ router.put('/:id/edit', (req, res) => {
     })
 })
 
-//
-
-let string = 'https://starving-artist.herokuapp.com/public/image262.jpg'
-
-let image = string.split('image')
-
-console.log(image[1])
-
 // Delete a product in the store
 router.delete('/:storeId/:productId', (req, res) => {
   Product.findOneAndRemove({ _id: req.params.productId }).then((product) => {
     if (!product.image.includes('seed')) {
       let image = product.image
       let imageNumber = image.split('image')
-      fs.unlink(`public/image${imageNumber}`)
+      fs.unlink(`public/image${imageNumber[1]}`)
     }
     res.json('Product Removed')
   })
@@ -168,7 +161,7 @@ router.delete('/:id', (req, res) => {
           if (!product.image.includes('seed')) {
             let image = product.image
             let imageNumber = image.split('image')
-            fs.unlink(`public/image${imageNumber}`)
+            fs.unlink(`public/image${imageNumber[1]}`)
           }
           product.save()
         }
