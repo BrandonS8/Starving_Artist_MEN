@@ -9,11 +9,13 @@ router.post('/upload', (req, res, next) => {
   console.log(req)
   let imageFile = req.files.file
 
-  imageFile.mv(`./public/${req.body.filename}.jpg`, function (err) {
+  //put the image file in the public folder
+  imageFile.mv(`./public/${req.body.filename}.jpg`, function(err) {
     console.log(path.resolve(`./public/${req.body.filename}.jpg`))
     if (err) {
       return res.status(500).send(err)
     }
+    //render the image file on the page from the public folder
     res.json({ file: `public/${req.body.filename}.jpg` })
   })
 })
@@ -169,7 +171,6 @@ router.delete('/:id', (req, res) => {
     })
 })
 
+module.exports = router
 // adding file upload functionality to the server
 // referenced from: https://levelup.gitconnected.com/file-upload-with-node-js-react-js-686e342ad7e7
-
-module.exports = router
