@@ -9,7 +9,7 @@ router.post('/upload', (req, res, next) => {
   console.log(req)
   let imageFile = req.files.file
 
-  imageFile.mv(`./public/${req.body.filename}.jpg`, function(err) {
+  imageFile.mv(`./public/${req.body.filename}.jpg`, function (err) {
     console.log(path.resolve(`./public/${req.body.filename}.jpg`))
     if (err) {
       return res.status(500).send(err)
@@ -18,14 +18,7 @@ router.post('/upload', (req, res, next) => {
   })
 })
 
-// catch 404
-router.use(function(req, res, next) {
-  const err = new Error('Not Found')
-  err.status = 404
-  next(err)
-})
-
-//display homepage of stores
+// display homepage of stores
 router.get('/', (req, res) => {
   Store.find()
     .populate('products')
@@ -37,7 +30,7 @@ router.get('/', (req, res) => {
     })
 })
 
-//display all products
+// display all products
 router.get('/products', (req, res) => {
   Product.find()
     .then(product => {
@@ -48,7 +41,7 @@ router.get('/products', (req, res) => {
     })
 })
 
-//display specific store
+// display specific store
 router.get('/:id', (req, res) => {
   Store.findOne({ _id: req.params.id })
     .populate('products')
@@ -59,7 +52,7 @@ router.get('/:id', (req, res) => {
       console.log(err)
     })
 })
-//create a store
+// create a store
 router.post('/', (req, res) => {
   Store.create({
     name: req.body.name,
@@ -74,7 +67,7 @@ router.post('/', (req, res) => {
     })
 })
 
-//find a single product
+// find a single product
 router.get('/:storeId/:productId', (req, res) => {
   Product.findOne({ _id: req.params.productId })
     .then(product => {
@@ -85,7 +78,7 @@ router.get('/:storeId/:productId', (req, res) => {
     })
 })
 
-//add a new product
+// add a new product
 router.post('/:id', (req, res) => {
   Store.findOne({ _id: req.params.id })
     .then(store => {
@@ -111,7 +104,7 @@ router.post('/:id', (req, res) => {
     })
 })
 
-//update the product details
+// update the product details
 router.put('/:storeId/:productId/edit', (req, res) => {
   Product.findOneAndUpdate({ _id: req.params.productId }, req.body)
     .then(() => {
@@ -121,7 +114,7 @@ router.put('/:storeId/:productId/edit', (req, res) => {
       console.log(err)
     })
 })
-//edit the store route
+// edit the store route
 router.put('/:id/edit', (req, res) => {
   Store.findOneAndUpdate({ _id: req.params.id }, req.body)
     .then(() => {
@@ -132,7 +125,7 @@ router.put('/:id/edit', (req, res) => {
     })
 })
 
-//Delete a product in the store
+// Delete a product in the store
 router.delete('/:storeId/:productId', (req, res) => {
   Product.findOneAndRemove({ _id: req.params.productId }).then(() => {
     res.json('Product Removed')
@@ -147,7 +140,7 @@ router.delete('/:storeId/:productId', (req, res) => {
     })
 })
 
-//delete the store
+// delete the store
 router.delete('/:id', (req, res) => {
   let productsToRemove = []
   Store.findOne({ _id: req.params.id })
@@ -176,7 +169,7 @@ router.delete('/:id', (req, res) => {
     })
 })
 
-//adding file upload functionality to the server
-//referenced from: https://levelup.gitconnected.com/file-upload-with-node-js-react-js-686e342ad7e7
+// adding file upload functionality to the server
+// referenced from: https://levelup.gitconnected.com/file-upload-with-node-js-react-js-686e342ad7e7
 
 module.exports = router
