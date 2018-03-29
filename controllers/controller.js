@@ -3,6 +3,7 @@ const router = express.Router()
 const Store = require('../models/Store')
 const Product = require('../models/Product')
 const path = require('path')
+const fs = require('fs')
 
 // /upload is at the top so that it doesn't contradict /:id
 router.post('/upload', (req, res, next) => {
@@ -129,7 +130,12 @@ router.put('/:id/edit', (req, res) => {
 
 // Delete a product in the store
 router.delete('/:storeId/:productId', (req, res) => {
-  Product.findOneAndRemove({ _id: req.params.productId }).then(() => {
+  Product.findOneAndRemove({ _id: req.params.productId }).then((product) => {
+    if (!product.image.includes('seed')) {
+      let image = product.image
+      let imageNumber = image.split('image')
+      fs.unlink(`public/image${imageNumber[1]}`)
+    }
     res.json('Product Removed')
   })
   Store.findOne({ _id: req.params.storeId })
@@ -153,8 +159,14 @@ router.delete('/:id', (req, res) => {
     })
     .then(() => {
       productsToRemove.forEach(product => {
-        Product.findOneAndRemove({ _id: product }).then(product =>
+        Product.findOneAndRemove({ _id: product }).then(product => {
+          if (!product.image.includes('seed')) {
+            let image = product.image
+            let imageNumber = image.split('image')
+            fs.unlink(`public/image${imageNumber[1]}`)
+          }
           product.save()
+        }
         )
       })
     })
