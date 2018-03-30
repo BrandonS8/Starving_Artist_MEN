@@ -11,20 +11,41 @@ Store.remove({}).then(() => {
     }).then(store => {
       Promise.all([
         Product.create({
-          artist: 'Brandon',
-          title: 'A dog',
-          description: 'A drawing of a dog',
-          image: 'https://starving-artist.herokuapp.com/public/seed/dog.jpg',
-          price: 500000
+          artist: 'Chris Barbalis',
+          title: 'A Parrot',
+          description: 'A parrot in disguise',
+          image: 'https://starving-artist.herokuapp.com/public/seed/chris-barbalis.jpg',
+          price: 500.00
         }).then(product => {
           store.products.push(product)
         }),
+        
         Product.create({
-          artist: 'Brandon',
-          title: 'A sponge',
-          description: 'Literally a picture of a sponge',
-          image: 'https://starving-artist.herokuapp.com/public/seed/sponge.jpg',
-          price: 13
+          artist: 'Patrick Tomasso',
+          title: 'Planets',
+          description: 'View from a galaxy far far away',
+          image: 'https://starving-artist.herokuapp.com/public/seed/planet.jpg',
+          price: 130.00
+        }).then(product => {
+          store.products.push(product)
+        }),
+
+        Product.create({
+          artist: 'Patrick Tomasso',
+          title: 'Lines',
+          description: 'Imagination of an artist',
+          image: 'https://starving-artist.herokuapp.com/public/seed/patrick-tomasso.jpg',
+          price: 150.00
+        }).then(product => {
+          store.products.push(product)
+        }),
+
+        Product.create({
+          artist: 'Patrick Henry',
+          title: 'Motivation',
+          description: 'Each day is a new day',
+          image: 'https://starving-artist.herokuapp.com/public/seed/motivation.jpg',
+          price: 140.00
         }).then(product => {
           store.products.push(product)
         })
@@ -32,26 +53,48 @@ Store.remove({}).then(() => {
         store.save(error => console.log(error))
       })
     })
+
     Store.create({
       name: "Carl's Store",
-      about: "Carl's Lame Store"
+      about: "Carl's Art Store"
     }).then(store => {
       Promise.all([
         Product.create({
-          artist: 'Carl',
-          title: 'Carl',
-          description: 'A picture of carl',
-          image: 'https://starving-artist.herokuapp.com/public/seed/carl.png',
-          price: 1
+          artist: 'Daniel Posthumah',
+          title: 'Colorful Splash',
+          description: 'A calming state of mind',
+          image: 'https://starving-artist.herokuapp.com/public/seed/daniel-posthumah.jpg',
+          price: 160.00
         }).then(product => {
           store.products.push(product)
         }),
+       
         Product.create({
-          artist: 'Carl',
-          title: 'Teacher Carl',
-          description: 'Carl does a teach',
-          image: 'https://starving-artist.herokuapp.com/public/seed/carl2.jpg',
-          price: 2
+          artist: 'David Lauriski',
+          title: 'Blocks',
+          description: 'Patches of imagaination',
+          image: 'https://starving-artist.herokuapp.com/public/seed/gem-lauris-rk.jpg',
+          price: 200.00
+        }).then(product => {
+          store.products.push(product)
+        }),
+        
+        Product.create({
+          artist: 'John Jennings',
+          title: 'Colorful Bottles',
+          description: 'Cabinet full of thoughts',
+          image: 'https://starving-artist.herokuapp.com/public/seed/john-jennings.jpg',
+          price: 100.00
+        }).then(product => {
+          store.products.push(product)
+        }),
+        
+        Product.create({
+          artist: 'Mec-Rawlings',
+          title: 'Abstract State of Mind',
+          description: 'Distorted imagaination',
+          image: 'https://starving-artist.herokuapp.com/public/seed/mec-rawlings.jpg',
+          price: 250.00
         }).then(product => {
           store.products.push(product)
         })
